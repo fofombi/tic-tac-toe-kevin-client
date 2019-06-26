@@ -1,1 +1,39 @@
 @import '~bootstrap/scss/bootstrap';
+
+$black: #000;
+
+.success {
+  // green
+  background-color: $black;
+}
+
+.failure {
+  // red
+  background-color: #F00;
+}
+
+
+.border {
+  border: 3px solid $black;
+  margin: 20px;
+  padding: 20px;
+}
+
+// style the header with  Gray background and some padding
+.header {
+  align-items: center;
+  background-color: #f1f1f1;
+  overflow: hidden;
+  padding: 20px 20px;
+  display: flex;
+    height: 120px;
+    min-width: 120px;
+    color: #fff;
+    text-shadow: #000 0 0 .2em;
+}
+
+.even {
+  border: 5px solid $black;
+  height: 120px;
+  width: 120px;
+}
