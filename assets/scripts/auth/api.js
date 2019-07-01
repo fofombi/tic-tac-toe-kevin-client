@@ -29,9 +29,16 @@ const signOut = () => {
     }
   })
 }
+const updateGame = function (id) {
+  return $.ajax({
+    url: config.apiUrl + '/game/' + id,
+    method: 'PATCH'
+  })
+}
 
 module.exports = {
   signUp,
   signIn,
-  signOut
+  signOut,
+  updateGame
 }

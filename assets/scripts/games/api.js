@@ -1,14 +1,14 @@
 'use strict'
 // development: 'https://tic-tac-toe-wdi.herokuapp.com/',
-// production: 'https://tic-tac-toe-wdi-production.herokuapp.com'
+// production:'https://tic-tac-toe-wdi-production.herokuapp.com'
 
 const config = require('../config')
 const store = require('../store')
 
-const createExample = formData => {
+const createGame = () => {
   return $.ajax({
-    url: config.apiUrl + '/examples',
-    data: formData,
+    url: config.apiUrl + '/games',
+    data: {},
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -17,5 +17,6 @@ const createExample = formData => {
 }
 
 module.exports = {
-  createExample
+  createGame
+
 }
