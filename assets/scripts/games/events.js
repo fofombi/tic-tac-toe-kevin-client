@@ -109,7 +109,7 @@ const win = function () {
   }
 
   // If Player 1 is winner
-  if (winner === 'pl1') {
+  if (winner === 'x') {
     // Display "screen-win-one" finish screen
     $('#finish').addClass('screen-win-one')
     $('#message').html('PLAYER 1 WINS')
@@ -117,7 +117,7 @@ const win = function () {
     $('#finish').show()
 
     // If Player 2 is winner
-  } else if (winner === 'pl2') {
+  } else if (winner === 'o') {
     // Display "screen-win-two" finish screen
     $('#finish').addClass('screen-win-two')
     $('.message').html('PLAYER 2 WINS')
