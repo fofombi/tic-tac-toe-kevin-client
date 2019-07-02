@@ -1,7 +1,8 @@
 # My Tic Tac Toe Game
-It's simple game created with my javascript/jQuery. It's a game which the user is able to choose whether to play as X or O and have the computer shows each play and there a winner or the game is tie.
+* As user, I want to create a tic tac toe game with two players
+It's simple game  with my javascript/jQuery. It's a game which the user is able to choose whether to play as X or O and have the computer shows each play and there a winner or the game is tie.
 
-*Table of total 9 squares (cells) 3 rows,3 columns a three squares diagonal.
+*Table of total 9 squares (cells) 3 rows,3 columns a two squares diagonal.
 Table square with these ID:       1   2   3
                                   4   5   6
                                   7   8   9

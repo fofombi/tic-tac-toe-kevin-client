@@ -19,6 +19,8 @@ $(() => {
   $('#create-game').on('click', gameEvents.onCreateGame)
   $('#onDebute').on('click', gameEvents.debute)
   $('.cell').on('click', gameEvents.playState)
+  $('.cell').on('click', gameEvents.cells)
+  $('.cell').on('click', gameEvents.onCellClick)
   $('#reset').on('click', gameEvents.joue)
 })
 

@@ -20,67 +20,47 @@ const onCreateGame = event => {
     .then(ui.createGameSuccessful)
     .catch(ui.createGameFailure)
 }
+//  allow player 1 or player 2 to click on a cell
+const cellClicked = (event) => {
+  console.log('click')
+  const $cells = $(event.target)
+  currentPlayer = currentPlayer === '○' ? '✕' : '○'
+  $cells[event.target.id].css('background', 'transparent').text(currentPlayer)
+}
 
-let currentPlayer = 'X'
-// const cellsClicked = (event) =>{
-// console.log('click')
-// const $cells = $(event.target)
-// currentPlayer = currentPlayer === 'O'? 'O':'X',
-// $Cells.css('background-color', text.currentPlayer)
-// }
-
-// const onDebute = function (event) {
-// event.preventDefault()
-// const data = getFormFields(event.target)
-// api.debute(data)
-// .then(ui.debuteSuccess)
-//   .catch(ui.debuteFailure)
-
-// gameState How to play the game
-// We have a table of 9 empty cells (boxs)
+// We have a table of 9 empty cells (boxs)-
 
 // const retriever =function() {
+let currentPlayer = 'x'
+// the board container has 9 cells (squares)
 const cells = ['', '', '', '', '', '', '', '', '']
+// check if cells is empty
+// if (cells[event.target.id] !== '') {
+//   console.log('cell no available')
+// } else {
+// $(event.target).text(currentPlayer)
+// cells[event.target.id] = currentPlayer
+// }
+// check if there is not winner or the game is not tie.
+// if (cells[event.taget.id] !== [0,1, 2] || [3,4,5] || [6,7,8] || [0,3,6] || [1,4,7] || [2,5,8] || [0,4,8] || [2,4,6] &&  cells = ["o","x","o","x","o","x","o","x","o"]){
+// $(event.target.id).text(secondPlayer)
+// } else {
+// $(event.target).text(currentPlayer)
+// cells[event.target.id]= currentPlayer
+
+// }
 
 // const game = function hasSpace(board) {
 // return board.some(row => row.some(item => item === ' '));
 const playState = function (event) {
   console.log(event.target.id)
   $(event.target).text(currentPlayer)
+  if (currentPlayer === 'x') {
+    currentPlayer = 'o'
+  } else {
+    currentPlayer = 'x'
+  }
 }
-// }
-// let player1 = 'X'
-// let player2 = 'o'
-// const gameSate = function () {
-// "cells": ["","","","","","","","",""]
-
-// "id": 1,
-// "cells": ["o","x","o","x","o","x","o","x","o"],
-// "over": true,
-// "Pl1": {
-// "id": 1,
-//  },
-// "pl2": null
-// },
-// {
-// "id": 2,
-// "cells": ["","","","","","","","",""],
-// "over": false,
-// "pl1": {
-// "id": 3,
-// },
-// "pl2": null
-// }
-
-// const joue = function () {
-// const randomCell = Math.floor(Math.random() * 10)
-// if (gameState.cells[randomCell - 1] === '') {
-// gameState.cells[randomCell - 1] = gameState.pl2
-// const cellID = '#c' + randomCell
-// $(cellID).html(gameState.pl2)
-// } else {
-// joue()
-//  }
 
 const debute = function () {
   $('.cells').each(function () {
@@ -93,31 +73,6 @@ const debute = function () {
     })
   })
 }
-// gameState.cells[combo[0]] !== "" && gameState.cells[combo[0]] == gameState.cell[combo[1]] && gameState.cell[combo[1]] == gameState.cell[combo[2]]) }
-// id of a player is actived when the player click on any cell.
-// $('.cells').click(function() {
-//     const activePlayer = $('.active').attr('id')
-//
-//     // Check if the cell has not already activated
-// if (!$(this).is('.cells-filled-1, .cells$(‘#message’).css(‘background-color’, ‘green’)lls-filled-2')) {
-//
-//       // add correct cell -filled
-//    if (activePlayer === 'pl1') {
-// $(this).addClass('cells-filled-1')
-// } else {
-//  $(this).addClass('cells-filled-2')
-// }
-//
-//       // The progress of the gameEventsif (activePlayer === "player1") {
-//       if (activePlayer == 'pl1') {
-//         $('#pl1').addClass("active")
-//       } else {
-//         $('#pl2').addClass("active")
-//       }
-//
-//       // condition of winning
-//
-//       // when a cell is played
 //
 
 const win = function () {
@@ -132,7 +87,7 @@ const win = function () {
     playedCells.push('null')
   }
 
-  //  const winCombos = [[0,1, 2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  //   winCombos = [[0,1, 2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
   //  winCombos.find(function (combo) {
   if (playedCells[0] !== 'null' && playedCells[0] === playedCells[1] && playedCells[1] === playedCells[2]) {
     // If game is won, assign correct player ID to winner variable
@@ -179,30 +134,14 @@ const win = function () {
   }
 }
 
-// const reset = function () {
-// $('.cell').html('')
-//   cells = [
-//    '', '', '', '', '', '', '', '', ''
-//  ]
-// }
-// $('.cell').click(function (e) {
-// $(this).html(gameState.pl1)
-// const dataID = (parseInt(e.target.id.charAt(1)))
-// gameState.cells[dataID - 1] = $(this).html()
-//  joue()
-// win()
-// (!gameState.cells.includes('')) {
-// reset()
-// }
-// })
-
-// $('#reset').click(function () {
-// reset()
+//
 
 module.exports = {
   onCreateGame,
   debute,
   playState,
+  cells,
   // joue,
-  win
+  win,
+  cellClicked
 }
