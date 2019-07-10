@@ -34,13 +34,22 @@ const signUpFailure = () => {
 const signInSuccessful = (responseData) => {
   successMessage('You signed in successfully')
   store.user = responseData.user
+
+  $('#board').removeClass('hidden')
+  $('#sign-out').removeClass('hidden')
+  $('#create-game').removeClass('hidden')
+  $('#change-password').removeClass('hidden')
+  $('#update').show()
+
+  $('#sign-in').addClass('hidden')
+  $('#sign-up').addClass('hidden')
 }
 
 const signInFailure = () => {
   failureMessage('Wrong email or password')
 }
 
-const changePasswordSuccessful = responseData => {
+const changePasswordSuccess = responseData => {
   console.log('responseData is', responseData)
   successMessage('You changed your password successfully!')
   // keep track the user, so we can have the token for the api//
@@ -58,6 +67,13 @@ const signOutFailure = () => {
 const signOutSuccessful = responseData => {
   console.log('responseData is', responseData)
   successMessage('You have successfully signed out!')
+  $('#board').addClass('hidden')
+  $('#sign-out').addClass('hidden')
+  $('#create-game').addClass('hidden')
+  $('#change-password').addClass('hidden')
+
+  $('#sign-in').removeClass('hidden')
+  $('#sign-up').removeClass('hidden')
 }
 
 module.exports = {
@@ -65,7 +81,7 @@ module.exports = {
   signUpFailure,
   signInSuccessful,
   signInFailure,
-  changePasswordSuccessful,
+  changePasswordSuccess,
   changePasswordFailure,
   signOutFailure,
   signOutSuccessful

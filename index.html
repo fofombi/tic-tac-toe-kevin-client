@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
-<header>
-      <h1> WELCOME!  LET HAVE A FUN</h1>
-      <h2>Tic Tac Toe Game</h2>
-    </header>
+<head>
 
-    <head>
+
       <title>Tic Tac Toe Game</title>
+
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -15,15 +13,16 @@
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-4" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-4" defer></script>
-    </head>
 
-
-
+  </head>
+<body>
+<h1> WELCOME!  LET HAVE A FUN</h1>
+<h2>Tic Tac Toe Game</h2>
         <h3 id="message"></h3>
 <div class="row">
 
       <form id="sign-up" class="col-md-6 mb-5">
-        <h2>Sign Up</h2>
+        <h3>Sign Up</h3>
         <input class="form-control mb-1" type="email" name="credentials[email]" placeholder="Email">
         <input class="form-control mb-1" type="password" name="credentials[password]" placeholder="Password">
         <input class="form-control mb-1" type="password" name="credentials[password_confirmation]" placeholder="Confirm password">
@@ -32,56 +31,59 @@
 
 
       <form id="sign-in" class="col-md-6 mb-5">
-          <h2>Sign In</h2>
+          <h3>Sign In</h3>
         <input class="form-control mb-1" type="email" name="credentials[email]" placeholder="Email">
         <input class="form-control mb-1" type="password" name="credentials[password]" placeholder="Password">
         <button class="btn btn-primary">Sign In!</button>
       </form>
 
 </div>
-    <h2>Change Password</h2 class="btn btn-primary"
-      <form id ="change-password">
-        <input class="form-control mb-1" type="password" name="password[old]" placeholder="Old Password">
-        <input class="form-control mb-1" type="password" name="password[new]" placeholder="New Password">
-        <button class="btn btn-primary">Change Password!</button>
-      </form>
 
-<h3>Sign Out</h3>
-      <form id="sign-out">
+      <div class=“form-group”>
+           <form id="change-password" class="hidden">
+             <h3>Change Password</h3 >
+             <input  type="password" name="passwords[old]" placeholder="Old Password">
+             <input  type="password" name="passwords[new]" placeholder="new Password">
+
+             <button class="btn btn-outline-secondary" type='submit'> Change </button>
+           </form>
+       </div>
+
+<div>
+      <form id="sign-out" class="hidden">
+        <h3>Sign Out</h3>
         <button class="btn btn-primary">Sign Out!</button>
       </form>
+</div>
 
-<h2>Create a Grame</h2>
-      <form id="create-example">
-        <input class="form-control mb-1" type="text" name="example[text]" placeholder="Enter any text ...">
-        <button class="btn btn-primary">Create</button>
-      </form>
+        <button id="create-game" class="btn btn-primary  hidden">Create</button>
+<table id="board" class="container hidden">
 
-    </body>
 
-    <body>
-
-<table id="board" class="board">
             <tr>
-                <td id="zero" class="even">0</td>
-                <td id="one" class="even">1</td>
-                <td id="three" class="even">2</td>
+                <td id="0" class="cell"></td>
+                <td id="1" class="cell"></td>
+                <td id="2" class="cell"></td>
             </tr>
             <tr>
-                <td id="four" class="even">3</td>
-                <td id="five" class="even">4</td>
-                <td id="six"class="even">5</td>
+                <td id="3" class="cell"></td>
+                <td id="4" class="cell"></td>
+                <td id="5"class="cell"></td>
             </tr>
             <tr>
-                <td id="seven" class="even">6</td>
-                <td id="eight"class="even">7</td>
-                <td id="nine" class="even">8</td>
+                <td id="6" class="cell"></td>
+                <td id="7"class="cell"></td>
+                <td id="8" class="cell"></td>
             </tr>
-        </table>
+    </table>
 
-      </body>
 
-    <body>
+      <div class="arrange">
+        <button class="btn btn-primary hidden" id="update">Update Game</button>
+      </div>
+
+
+
       <h1>Hope you enjoy!</h1>
     </body>
 </html>

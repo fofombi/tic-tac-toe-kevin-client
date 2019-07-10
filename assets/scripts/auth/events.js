@@ -28,17 +28,16 @@ const onSignIn = event => {
 
 const onChangePassword = event => {
   event.preventDefault()
+  console.log('You have changed your Password')
 
-  const form = event.target
-  const formData = getFormFields(form)
-  api.changePassword(formData)
-    .then(ui.changePasswordSuccessful)
+  const data = getFormFields(event.target)
+  api.changePassword(data)
+    .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
 }
 // Sign out
 const onSignOut = event => {
   event.preventDefault()
-
   api.signOut()
     .then(ui.signOutSuccessful)
     .catch(ui.signOutFailure)
