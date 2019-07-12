@@ -5,11 +5,22 @@ const api = require('./api')
 const ui = require('./ui')
 
 // an event handler, note the parameter will be your event
+
+// const getFormFields = require('../../../lib/get-form-fields')
+const api = require('./api')
+const ui = require('./ui')
+const store = require('../store.js')
+store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+store['currentPlayer'] = 'O'
+store.click = false
+$('#update').hide()
+// an event handler, note the parameter Owill be your event
 const onCreateGame = event => {
   // since we are submitting a form, we prevent the default action of
   // refreshing the page. This wouldn't be needed for a button click, but it is
   // needed since we are submitting a form.
   event.preventDefault()
+
 
   // event.target is whatever we are listening to, in this case:
   // the #create-example form
@@ -26,41 +37,58 @@ const cellClicked = (event) => {
   const $cells = $(event.target)
   currentPlayer = currentPlayer === '○' ? '✕' : '○'
   $cells[event.target.id].css('background', 'transparent').text(currentPlayer)
+=======
+  // event.target is whatever we are listening to, in this case:
+  // the #create-example form
+  // call our createExample AJAX request, passing it the data from our form
+
+  $('.cell').text('')
+  store['currentPlayer'] = ''
+  store.click = false
+  store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  store.full = false
+  store.winner = null
+  api.createGame()
+    .then(ui.createGameSuccessful)
+    .catch(console.log)
+}
+//  allow player 1 or player 2 to click on a cell
+const cellClicked = (event) => {
+  const $cells = $(event.target)
+  // check if the cells is empty then we will draw x or O into the cells
+  if (store.click === true) {
+    $('#message').text('You cannot click')
+  }
+  if (!($cells.text() !== 'o' && $cells.text() !== 'x')) {
+    $('#message').text('click another place')
+  }
+  if ($cells.text() !== 'o' && $cells.text() !== 'x' && store.click !== true) {
+    store.currentPlayer = store.currentPlayer === 'x' ? 'o' : 'x'
+    $(event.target).css('text-align', 'center')
+    store.play[event.target.id] = store.currentPlayer
+    console.log(`${event.target.id} and play ${store.play}`)
+    store.previousPlayer = store.currentPlayer === 'x' ? 'o' : 'x'
+
+    $(event.target).css('text-align', 'center')
+    const message = store.previousPlayer + ' is next turn'
+
+    $('#message').text(message)
+    console.log(store.currentPlayer + ' ' + store.previousPlayer)
+    $cells.css('background', 'tcheckEmptyransparent').text(store.currentPlayer)
+    store.full = checkEmpty()
+
+    win()
+    api.updateGame(event.target.id, store.previousPlayer)
+      .then(ui.updateSuccessful)
+  }
+
 }
 
 // We have a table of 9 empty cells (boxs)-
 
 // const retriever =function() {
-let currentPlayer = 'x'
 // the board container has 9 cells (squares)
 const cells = ['', '', '', '', '', '', '', '', '']
-// check if cells is empty
-// if (cells[event.target.id] !== '') {
-//   console.log('cell no available')
-// } else {
-// $(event.target).text(currentPlayer)
-// cells[event.target.id] = currentPlayer
-// }
-// check if there is not winner or the game is not tie.
-// if (cells[event.taget.id] !== [0,1, 2] || [3,4,5] || [6,7,8] || [0,3,6] || [1,4,7] || [2,5,8] || [0,4,8] || [2,4,6] &&  cells = ["o","x","o","x","o","x","o","x","o"]){
-// $(event.target.id).text(secondPlayer)
-// } else {
-// $(event.target).text(currentPlayer)
-// cells[event.target.id]= currentPlayer
-
-// }
-
-// const game = function hasSpace(board) {
-// return board.some(row => row.some(item => item === ' '));
-const playState = function (event) {
-  console.log(event.target.id)
-  $(event.target).text(currentPlayer)
-  if (currentPlayer === 'x') {
-    currentPlayer = 'o'
-  } else {
-    currentPlayer = 'x'
-  }
-}
 
 const debute = function () {
   $('.cells').each(function () {
@@ -73,75 +101,113 @@ const debute = function () {
     })
   })
 }
-//
+// check for winning
 
 const win = function () {
-  const playedCells = []
-  let winner = ''
-
-  if ($(this).is('.cells-filled-1')) {
-    playedCells.push('pl1')
-  } else if ($(this).is('.cells-filled-2')) {
-    playedCells.push('pl2')
-  } else {
-    playedCells.push('null')
-  }
-
-  //   winCombos = [[0,1, 2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  // winCombos = [[0,1, 2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
   //  winCombos.find(function (combo) {
-  if (playedCells[0] !== 'null' && playedCells[0] === playedCells[1] && playedCells[1] === playedCells[2]) {
+  if (store.play[0] !== 'null' && store.play[0] === store.play[1] && store.play[1] === store.play[2]) {
+    store.winner = store.currentPlayer
+    alert()
     // If game is won, assign correct player ID to winner variable
-    winner = playedCells[0]
-  } else if (playedCells[0] !== 'null' && playedCells[0] === playedCells[3] && playedCells[3] === playedCells[6]) {
-    winner = playedCells[0]
-  } else if (playedCells[0] !== 'null' && playedCells[0] === playedCells[4] && playedCells[4] === playedCells[8]) {
-    winner = playedCells[0]
-  } else if (playedCells[1] !== 'null' && playedCells[1] === playedCells[4] && playedCells[4] === playedCells[7]) {
-    winner = playedCells
-  } else if (playedCells[3] !== 'null' && playedCells[3] === playedCells[4] && playedCells[4] === playedCells[5]) {
-    winner = playedCells[3]
-  } else if (playedCells[8] !== 'null' && playedCells[8] === playedCells[5] && playedCells[5] === playedCells[2]) {
-    winner = playedCells[8]
-  } else if (playedCells[8] !== 'null' && playedCells[8] === playedCells[7] && playedCells[7] === playedCells[6]) {
-    winner = playedCells[8]
-  } else if (playedCells[2] !== 'null' && playedCells[2] === playedCells[4] && playedCells[4] === playedCells[6]) {
-    winner = playedCells[2]
-  }
-
-  // If Player 1 is winner
-  if (winner === 'x') {
-    // Display "screen-win-one" finish screen
-    $('#finish').addClass('screen-win-one')
-    $('#message').html('PLAYER 1 WINS')
-    $('#board').hide()
-    $('#finish').show()
-
-    // If Player 2 is winner
-  } else if (winner === 'o') {
-    // Display "screen-win-two" finish screen
-    $('#finish').addClass('screen-win-two')
-    $('.message').html('PLAYER 2 WINS')
-    $('#board').hide()
-    $('#finish').show()
-
-    // If game has not been won but ther are no "null" values left in playedSquares array, it must be a draw
-  } else if (jQuery.inArray('null', playedCells) === -1) {
-    // Therefore, display tie game screen
-    $('#finish').addClass('screen-win-tie')
-    $('.message').html('DRAW')
-    $('#board').hide()
-    $('#finish').show()
+  } else if (store.play[0] === store.play[3] && store.play[3] === store.play[6]) {
+    store.winner = store.currentPlayer
+    alert()
+  } else if (store.play[0] !== 'null' && store.play[0] === store.play[4] && store.play[4] === store.play[8]) {
+    store.winner = store.currentPlayer
+    alert()
+  } else if (store.play[1] !== 'null' && store.play[1] === store.play[4] && store.play[4] === store.play[7]) {
+    store.winner = store.currentPlayer
+    alert()
+  } else if (store.play[3] !== 'null' && store.play[3] === store.play[4] && store.play[4] === store.play[5]) {
+    store.winner = store.currentPlayer
+    alert()
+  } else if (store.play[8] !== 'null' && store.play[8] === store.play[5] && store.play[5] === store.play[2]) {
+    store.winner = store.currentPlayer
+    alert()
+  } else if (store.play[8] !== 'null' && store.play[8] === store.play[7] && store.play[7] === store.play[6]) {
+    store.winner = store.currentPlayer
+    alert()
+  } else if (store.play[2] !== 'null' && store.play[2] === store.play[4] && store.play[4] === store.play[6]) {
+    store.winner = store.currentPlayer
+    alert()
+  } else if (checkEmpty()) {
+    alert()
   }
 }
 
-//
+const onDisplayPastGame = event => {
+  event.preventDefault()
+  $('#myModal').addClass('block')
+  api.getAllGame()
+    .then(ui.displayAllGame)
+}
+
+const onFerme = event => {
+  event.preventDefault()
+  $('#myModal').removeClass('block')
+}
+// ---------To display past game ------
+const onInformation = event => {
+  const target = $(event.target)
+  const id = target.data('id')
+  store.idResume = id
+  console.log(store.idResume)
+  api.getAllGame()
+    .then(ui.displayGame)
+}
+// If Player 1 is winner
+const alert = function () {
+  if (store.winner === 'x') {
+    // Display "screen-win-one" finish screen
+    $('#finish').addClass('screen-win-one')
+    $('#message').text('x win')
+    $('#finish').show()
+    store.click = true
+
+    // If Player 2 is winner
+  } else if (store.winner === 'o') {
+    // Display "screen-win-two" finish screen
+    $('#finish').addClass('screen-win-two')
+    $('#message').html('O  WINS')
+    $('#finish').show()
+    store.click = true
+    // If game has not been won but ther are no "null" values left in playedSquares array, it must be a draw
+  } else if (store.full) {
+    // Therefore, display tie game screen
+    $('#finish').addClass('screen-win-tie')
+    $('#message').html('DRAW')
+    $('#finish').show()
+
+    store.click = true
+  }
+}
+const onUpdateGame = event => {
+  event.preventDefault()
+  //  const boardnow = store.game
+  const index = event.target.id
+  const value = $(event.target).text()
+  api.updateGame(index, value)
+    .then(console.log)
+    .catch()
+}
+// check empty cell if it's empty accept click
+const checkEmpty = function () {
+  console.log(' You have Played')
+  return store.play.every(p => {
+    return (typeof p !== 'number')
+  })
+}
 
 module.exports = {
   onCreateGame,
   debute,
-  playState,
   cells,
-  // joue,
+  onUpdateGame,
+  onFerme,
+  onInformation,
+  onDisplayPastGame,
+  alert,
   win,
   cellClicked
 }

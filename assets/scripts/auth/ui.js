@@ -21,7 +21,6 @@ const failureMessage = message => {
 }
 
 const signUpSuccessful = responseData => {
-  console.log('responseData is', responseData)
   successMessage('You signed up successfully!')
   // keep track the user, so we can have the token for the api//
   // We use 'store' so we can access the token in any file
@@ -35,11 +34,14 @@ const signInSuccessful = responseData => {
   // console.log(‘responseData is’, responseData)
 // successMessage(‘You signed in successfully’)
   store.user = responseData.user
-  // $(‘#sign-in’).addClass(‘hidden’)
-  // $(‘#sign-up’).addClass(‘hidden’)
-  // $(‘#sign-out’).removeClass(‘hidden’)
-  // $(‘.board’).removeClass(‘hidden’)
-  // $(‘#change-password’).removeClass(‘hidden’)
+
+  $('#sign-out').removeClass('hidden')
+  $('#create-game').removeClass('hidden')
+  $('#change-password').removeClass('hidden')
+  $('#update').show()
+
+  $('#sign-in').addClass('hidden')
+  $('#sign-up').addClass('hidden')
 }
 
 const signInFailure = () => {
@@ -47,8 +49,7 @@ const signInFailure = () => {
   // store.user = responseData.user
 }
 
-const changePasswordSuccessful = responseData => {
-  console.log('responseData is', responseData)
+const changePasswordSuccess = responseData => {
   successMessage('You changed your password successfully!')
   // keep track the user, so we can have the token for the api//
   // We use
@@ -63,8 +64,14 @@ const signOutFailure = () => {
 }
 
 const signOutSuccessful = responseData => {
-  console.log('responseData is', responseData)
   successMessage('You have successfully signed out!')
+  $('#board').addClass('hidden')
+  $('#sign-out').addClass('hidden')
+  $('#create-game').addClass('hidden')
+  $('#change-password').addClass('hidden')
+
+  $('#sign-in').removeClass('hidden')
+  $('#sign-up').removeClass('hidden')
 }
 
 module.exports = {
@@ -72,7 +79,7 @@ module.exports = {
   signUpFailure,
   signInSuccessful,
   signInFailure,
-  changePasswordSuccessful,
+  changePasswordSuccess,
   changePasswordFailure,
   signOutFailure,
   signOutSuccessful

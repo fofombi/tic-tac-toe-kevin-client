@@ -1,6 +1,6 @@
 # VARIABLE=VALUE sh curl-scripts/auth/change-password.sh
 
-# BAhJIiU2ODgyYmZiMzI0OGVjNGQyZDY0NzI1NTQxODE0NzUyZgY6BkVG--4b587249db80de9732b7b8f0e0fe626bb2b5308b
+#Token token=BAhJIiViMWNkZTdiZjk2MzlhNzFmYTgzY2MwYmIzMDViYjljNgY6BkVG--9d22fd38e39dd02f0906d5fc87eeadc558db726d
 
 curl "https://wdi-library-api.herokuapp.com/change-password" \
   --include \

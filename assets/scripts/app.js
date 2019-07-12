@@ -8,7 +8,10 @@
 
 const authEvents = require('./auth/events')
 const gameEvents = require('./games/events')
+<<<<<<< HEAD
 
+=======
+>>>>>>> development
 $(() => {
   // your JS code goes here
   // startScreenUi()
@@ -17,11 +20,16 @@ $(() => {
   $('#change-password').on('submit', authEvents.onChangePassword)
   $('#sign-out').on('submit', authEvents.onSignOut)
   $('#create-game').on('click', gameEvents.onCreateGame)
+<<<<<<< HEAD
   $('#onDebute').on('click', gameEvents.debute)
   $('.cell').on('click', gameEvents.playState)
   $('.cell').on('click', gameEvents.cells)
   $('.cell').on('click', gameEvents.onCellClick)
   $('#reset').on('click', gameEvents.joue)
+=======
+  $('#update').on('click', gameEvents.onUpdateGame)
+  $('.cell').on('click', gameEvents.cellClicked)
+>>>>>>> development
 })
 
 // Append start and finish screens to the body and immediately hide
