@@ -5,10 +5,10 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('../store.js')
 store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-store['currentPlayer'] = 'X'
+store['currentPlayer'] = 'O'
 store.click = false
 $('#update').hide()
-// an event handler, note the parameter will be your event
+// an event handler, note the parameter Owill be your event
 const onCreateGame = event => {
   // since we are submitting a form, we prevent the default action of
   // refreshing the page. This wouldn't be needed for a button click, but it is
@@ -19,10 +19,11 @@ const onCreateGame = event => {
   // call our createExample AJAX request, passing it the data from our form
 
   $('.cell').text('')
-  store['currentPlayer'] = 'x'
+  store['currentPlayer'] = ''
   store.click = false
   store.play = [1, 2, 3, 4, 5, 6, 7, 8, 9]
   store.full = false
+  store.winner = null
   api.createGame()
     .then(ui.createGameSuccessful)
     .catch(console.log)
@@ -30,10 +31,6 @@ const onCreateGame = event => {
 //  allow player 1 or player 2 to click on a cell
 const cellClicked = (event) => {
   const $cells = $(event.target)
-
-  // cells[event.target.id] = currentPlayer
-  // if the cells's text is not x or O then you can write down
-  //  .text() : it will get the text or content
   // check if the cells is empty then we will draw x or O into the cells
   if (store.click === true) {
     $('#message').text('You cannot click')
@@ -43,22 +40,19 @@ const cellClicked = (event) => {
   }
   if ($cells.text() !== 'o' && $cells.text() !== 'x' && store.click !== true) {
     store.currentPlayer = store.currentPlayer === 'x' ? 'o' : 'x'
-    $(event.target).text('x')
-    $(event.targe).css('font-size', '800px')
     $(event.target).css('text-align', 'center')
     store.play[event.target.id] = store.currentPlayer
     console.log(`${event.target.id} and play ${store.play}`)
     store.previousPlayer = store.currentPlayer === 'x' ? 'o' : 'x'
 
-    $(event.target).text('o')
-    $(event.targe).css('font-size', '800px')
     $(event.target).css('text-align', 'center')
     const message = store.previousPlayer + ' is next turn'
 
     $('#message').text(message)
     console.log(store.currentPlayer + ' ' + store.previousPlayer)
-    $cells.css('background', 'transparent').text(store.currentPlayer)
+    $cells.css('background', 'tcheckEmptyransparent').text(store.currentPlayer)
     store.full = checkEmpty()
+
     win()
     api.updateGame(event.target.id, store.previousPlayer)
       .then(ui.updateSuccessful)
@@ -68,7 +62,6 @@ const cellClicked = (event) => {
 // We have a table of 9 empty cells (boxs)-
 
 // const retriever =function() {
-store.currentPlayer = 'x'
 // the board container has 9 cells (squares)
 const cells = ['', '', '', '', '', '', '', '', '']
 
@@ -83,7 +76,7 @@ const debute = function () {
     })
   })
 }
-//
+// check for winning
 
 const win = function () {
   // winCombos = [[0,1, 2], [3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
@@ -113,8 +106,11 @@ const win = function () {
   } else if (store.play[2] !== 'null' && store.play[2] === store.play[4] && store.play[4] === store.play[6]) {
     store.winner = store.currentPlayer
     alert()
+  } else if (checkEmpty()) {
+    alert()
   }
 }
+
 const onDisplayPastGame = event => {
   event.preventDefault()
   $('#myModal').addClass('block')
@@ -170,8 +166,9 @@ const onUpdateGame = event => {
     .then(console.log)
     .catch()
 }
-
+// check empty cell if it's empty accept click
 const checkEmpty = function () {
+  console.log(' You have Played')
   return store.play.every(p => {
     return (typeof p !== 'number')
   })
@@ -182,8 +179,10 @@ module.exports = {
   debute,
   cells,
   onUpdateGame,
-//  onUpdateGame,
-  // joue,
+  onFerme,
+  onInformation,
+  onDisplayPastGame,
+  alert,
   win,
   cellClicked
 }

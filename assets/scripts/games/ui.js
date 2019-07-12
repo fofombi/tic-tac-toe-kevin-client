@@ -29,6 +29,7 @@ const createGameSuccessful = responseData => {
   // successMessage('You have create an example successfully')
   successMessage('Start  new Game')
   store.game = responseData.game
+  $('#board').removeClass('hidden')
   console.log(store.game.id)
 }
 // could you display the current game
@@ -79,6 +80,6 @@ module.exports = {
   createGameSuccessful,
   displayGame,
   displayAllGame,
-  resetSuccess,
-  updateSuccessful
+  updateSuccessful,
+  resetSuccess
 }

@@ -21,7 +21,6 @@ const failureMessage = message => {
 }
 
 const signUpSuccessful = responseData => {
-  console.log('responseData is', responseData)
   successMessage('You signed up successfully!')
   // keep track the user, so we can have the token for the api//
   // We use 'store' so we can access the token in any file
@@ -35,7 +34,6 @@ const signInSuccessful = (responseData) => {
   successMessage('You signed in successfully')
   store.user = responseData.user
 
-  $('#board').removeClass('hidden')
   $('#sign-out').removeClass('hidden')
   $('#create-game').removeClass('hidden')
   $('#change-password').removeClass('hidden')
@@ -50,7 +48,6 @@ const signInFailure = () => {
 }
 
 const changePasswordSuccess = responseData => {
-  console.log('responseData is', responseData)
   successMessage('You changed your password successfully!')
   // keep track the user, so we can have the token for the api//
   // We use
@@ -65,7 +62,6 @@ const signOutFailure = () => {
 }
 
 const signOutSuccessful = responseData => {
-  console.log('responseData is', responseData)
   successMessage('You have successfully signed out!')
   $('#board').addClass('hidden')
   $('#sign-out').addClass('hidden')
