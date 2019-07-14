@@ -131,7 +131,7 @@ const alert = function () {
   if (store.winner === 'x') {
     // Display "screen-win-one" finish screen
     $('#finish').addClass('screen-win-one')
-    $('#message').text('x win')
+    $('#message').text('X WINS')
     $('#finish').show()
     store.click = true
 

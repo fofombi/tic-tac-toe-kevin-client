@@ -77,11 +77,11 @@ const updateSuccessful = data => {
 
 }
 const getRecordFailure = (responseData) => {
-  $('#message').text(`Sorry! Try again.`)
+  $('#game-record').removeClass('hide')
+  $('#message').text(`Sorry! Wrong way to get the record.Try again.`)
 }
 const getRecordSuccess = (responseData) => {
   const game = responseData.games
-  $('#message').show()
   $('#message').text(`you have played ${game.length} times`)
 }
 module.exports = {

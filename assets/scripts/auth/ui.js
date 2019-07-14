@@ -64,6 +64,7 @@ const signOutFailure = () => {
 const signOutSuccessful = responseData => {
   successMessage('You have successfully signed out!')
   $('#board').addClass('hidden')
+  $('#game-record').hide()
   $('#sign-out').addClass('hidden')
   $('#create-game').addClass('hidden')
   $('#change-password').addClass('hidden')

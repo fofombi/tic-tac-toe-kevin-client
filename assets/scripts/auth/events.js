@@ -26,7 +26,6 @@ const onSignIn = event => {
 
 const onChangePassword = event => {
   event.preventDefault()
-  console.log('You have changed your Password')
 
   const data = getFormFields(event.target)
   api.changePassword(data)
