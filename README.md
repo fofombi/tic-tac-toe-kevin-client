@@ -26,6 +26,7 @@ https://github.com/fofombi/tic-tac-toe-kevin-client
 
 # My wireframes' links:
 https://i.imgur.com/C1jbhG1.jpg
+
 https://imgur.com/4rka6qd
 
 # The technologies used to create this project are:
