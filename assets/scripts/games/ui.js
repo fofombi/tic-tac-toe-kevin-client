@@ -20,20 +20,6 @@ const failureMessage = message => {
 }
 
 const createGameFailure = () => {
-<<<<<<< HEAD
-  failureMessage('You failed to create an Game')
-}
-
-const createGameSuccessful = responseData => {
-  // successMessage('You have create an example successfully')
-  successMessage('start your new Game')
-  store.game = responseData.game
-}
-
-module.exports = {
-  createGameFailure,
-  createGameSuccessful
-=======
   failureMessage('Fail to create an Game')
 }
 const resetSuccess = responseData => {
@@ -96,5 +82,4 @@ module.exports = {
   displayAllGame,
   updateSuccessful,
   resetSuccess
->>>>>>> development
 }

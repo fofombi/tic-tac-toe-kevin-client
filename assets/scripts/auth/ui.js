@@ -30,9 +30,8 @@ const signUpFailure = () => {
   failureMessage('You failed to sign up')
 }
 
-const signInSuccessful = responseData => {
-  // console.log(‘responseData is’, responseData)
-// successMessage(‘You signed in successfully’)
+const signInSuccessful = (responseData) => {
+  successMessage('You signed in successfully')
   store.user = responseData.user
 
   $('#sign-out').removeClass('hidden')
@@ -46,7 +45,6 @@ const signInSuccessful = responseData => {
 
 const signInFailure = () => {
   failureMessage('Wrong email or password')
-  // store.user = responseData.user
 }
 
 const changePasswordSuccess = responseData => {

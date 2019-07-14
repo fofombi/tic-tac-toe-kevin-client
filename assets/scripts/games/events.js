@@ -1,11 +1,5 @@
 'use strict'
 // require getFormFields, our api functions, and our ui functions
-const getFormFields = require('../../../lib/get-form-fields')
-const api = require('./api')
-const ui = require('./ui')
-
-// an event handler, note the parameter will be your event
-
 // const getFormFields = require('../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
@@ -20,24 +14,6 @@ const onCreateGame = event => {
   // refreshing the page. This wouldn't be needed for a button click, but it is
   // needed since we are submitting a form.
   event.preventDefault()
-
-
-  // event.target is whatever we are listening to, in this case:
-  // the #create-example form
-
-  // call our createExample AJAX request, passing it the data from our form
-  api.createGame()
-
-    .then(ui.createGameSuccessful)
-    .catch(ui.createGameFailure)
-}
-//  allow player 1 or player 2 to click on a cell
-const cellClicked = (event) => {
-  console.log('click')
-  const $cells = $(event.target)
-  currentPlayer = currentPlayer === '○' ? '✕' : '○'
-  $cells[event.target.id].css('background', 'transparent').text(currentPlayer)
-=======
   // event.target is whatever we are listening to, in this case:
   // the #create-example form
   // call our createExample AJAX request, passing it the data from our form
@@ -81,7 +57,6 @@ const cellClicked = (event) => {
     api.updateGame(event.target.id, store.previousPlayer)
       .then(ui.updateSuccessful)
   }
-
 }
 
 // We have a table of 9 empty cells (boxs)-

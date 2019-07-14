@@ -16,10 +16,6 @@ const createGame = () => {
   })
 }
 
-<<<<<<< HEAD
-module.exports = {
-  createGame
-=======
 // create game for a user
 
 // reset or update of my game.
@@ -83,6 +79,5 @@ module.exports = {
   jeux,
   tousJeux,
   updateGame
->>>>>>> development
 
 }
