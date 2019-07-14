@@ -42,14 +42,12 @@ const cellClicked = (event) => {
     store.currentPlayer = store.currentPlayer === 'x' ? 'o' : 'x'
     $(event.target).css('text-align', 'center')
     store.play[event.target.id] = store.currentPlayer
-    console.log(`${event.target.id} and play ${store.play}`)
     store.previousPlayer = store.currentPlayer === 'x' ? 'o' : 'x'
 
     $(event.target).css('text-align', 'center')
     const message = store.previousPlayer + ' is next turn'
 
     $('#message').text(message)
-    console.log(store.currentPlayer + ' ' + store.previousPlayer)
     $cells.css('background', 'tcheckEmptyransparent').text(store.currentPlayer)
     store.full = checkEmpty()
 
@@ -69,9 +67,7 @@ const debute = function () {
   $('.cells').each(function () {
     $(this).click(function () {
       if ($(`#pl1`).is('.active')) {
-        console.log('Player1 has played')
       } else if ((`#pl2`).is('.active')) {
-        console.log('Player 2 has played')
       }
     })
   })
@@ -127,7 +123,6 @@ const onInformation = event => {
   const target = $(event.target)
   const id = target.data('id')
   store.idResume = id
-  console.log(store.idResume)
   api.getAllGame()
     .then(ui.displayGame)
 }
@@ -168,12 +163,16 @@ const onUpdateGame = event => {
 }
 // check empty cell if it's empty accept click
 const checkEmpty = function () {
-  console.log(' You have Played')
   return store.play.every(p => {
     return (typeof p !== 'number')
   })
 }
-
+const onGetRecord = event => {
+  event.preventDefault()
+  api.getRecord()
+    .then(ui.getRecordSuccess)
+    .catch(ui.getRecordFailure)
+}
 module.exports = {
   onCreateGame,
   debute,
@@ -184,5 +183,6 @@ module.exports = {
   onDisplayPastGame,
   alert,
   win,
-  cellClicked
+  cellClicked,
+  onGetRecord
 }

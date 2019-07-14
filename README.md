@@ -24,8 +24,9 @@ I had difficulty to use for loop that looks through the squares and I did choose
 # my Github address link:
 https://github.com/fofombi/tic-tac-toe-kevin-client
 
-# My wireframe link:
+# My wireframes' links:
 https://i.imgur.com/C1jbhG1.jpg
+https://imgur.com/4rka6qd
 
 # The technologies used to create this project are:
     1. JavaScript

@@ -5,6 +5,7 @@ const successMessage = message => {
   $('#message').text(message)
   $('#message').removeClass('failure')
   $('#message').addClass('success')
+  $('#game-record').show()
 
   // Clear out our forms
   $('form').trigger('reset')
@@ -30,7 +31,7 @@ const createGameSuccessful = responseData => {
   successMessage('Start  new Game')
   store.game = responseData.game
   $('#board').removeClass('hidden')
-  console.log(store.game.id)
+  $('#game-record').show()
 }
 // could you display the current game
 const displayGame = responseData => {
@@ -73,7 +74,15 @@ const displayAllGame = responseData => {
   })
 }
 const updateSuccessful = data => {
-  console.log(data)
+
+}
+const getRecordFailure = (responseData) => {
+  $('#message').text(`Sorry! Try again.`)
+}
+const getRecordSuccess = (responseData) => {
+  const game = responseData.games
+  $('#message').show()
+  $('#message').text(`you have played ${game.length} times`)
 }
 module.exports = {
   createGameFailure,
@@ -81,5 +90,7 @@ module.exports = {
   displayGame,
   displayAllGame,
   updateSuccessful,
-  resetSuccess
+  resetSuccess,
+  getRecordFailure,
+  getRecordSuccess
 }
